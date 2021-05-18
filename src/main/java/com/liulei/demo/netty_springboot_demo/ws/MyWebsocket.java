@@ -9,22 +9,22 @@ import org.yeauty.pojo.Session;
 
 import java.util.Map;
 
-@ServerEndpoint(path = "/ws/api/{arg}")
+@ServerEndpoint(path = "/ws/api")
 @Component
 public class MyWebsocket {
 
-    @BeforeHandshake
-    public void handshake(Session session, HttpHeaders headers,
-                          @RequestParam String req,
-                          @RequestParam MultiValueMap reqMap,
-                          @PathVariable String arg,
-                          @PathVariable Map pathMap){
-        session.setSubprotocols("stomp");
-        if (!"ok".equals(req)){
-            System.out.println("Authentication failed!");
-            session.close();
-        }
-    }
+//    @BeforeHandshake
+//    public void handshake(Session session, HttpHeaders headers,
+//                          @RequestParam String req,
+//                          @RequestParam MultiValueMap reqMap,
+//                          @PathVariable String arg,
+//                          @PathVariable Map pathMap){
+//        session.setSubprotocols("stomp");
+//        if (!"ok".equals(req)){
+//            System.out.println("Authentication failed!");
+//            session.close();
+//        }
+//    }
 
     @OnOpen
     public void onOpen(Session session, HttpHeaders headers){
