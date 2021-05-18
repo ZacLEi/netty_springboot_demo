@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div id="msg"></div>
+<input type="text" id="text">
+<input type="submit" value="send" onclick="send()">
+</body>
+<script>
+    var msg = document.getElementById("msg");
+    var wsServer = 'ws://127.0.0.1:80/ws/api';
+    var websocket = new WebSocket(wsServer);
+    //监听连接打开
+    websocket.onopen = function (evt) {
+        msg.innerHTML = "The connection is open";
+    };
+
+    //监听服务器数据推送
+    // 通过onMessage获取服务器推送的数据
+    websocket.onmessage = function (evt) {
+        msg.innerHTML += "<br>" + evt.data;
+    };
+
+    //监听连接关闭
+    websocket.onclose = function (evt) {
+        alert("连接关闭");
+    };
+
+    function send() {
+        // 只是管发送ws请求
+        var text = document.getElementById("text").value
+        websocket.send(text);
+    }
+</script>
+</html>
